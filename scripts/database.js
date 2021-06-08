@@ -50,7 +50,7 @@ export const getStyles = () => {
     return [...database.styles]
 }
 export const getOrders = () => {
-    return database.customOrders.map(customOrders => ({...customOrder}))
+    return [...database.customOrders]
 }
 //Order Builder Functions
 export const setMetal = (id) => {
@@ -61,4 +61,20 @@ export const setSize = (id) => {
 }
 export const setStyle = (id) => {
     database.orderBuilder.styleId = id
+}
+export const getOrderBuilder = () => {
+    return database.orderBuilder
+}
+
+//Custom Orders
+export const addCustomOrder = () => {
+    const newOrder = {...database.orderBuilder}
+    const lastIndex = database.customOrders.length -1
+    newOrder.id = database.customOrders[lastIndex].id + 1
+
+    newOrder.timestamp = Date.now()
+    database.customOrders.push(newOrder)
+    database.orderBuilder = {}
+    
+    document.dispatchEvent(new CustomEvent("stateChanged"))
 }
