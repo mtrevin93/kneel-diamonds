@@ -33,9 +33,13 @@ const database = {
             styleId: 3,
             timestamp: 1614659931693
         }
-    ]
+    ],
+    orderBuilder: {
+
+    }
 }
 
+//Database Export Functions
 export const getMetals = () => {
     return [...database.metals]
 }
@@ -47,4 +51,14 @@ export const getStyles = () => {
 }
 export const getOrders = () => {
     return database.customOrders.map(customOrders => ({...customOrder}))
+}
+//Order Builder Functions
+export const setMetal = (id) => {
+    database.orderBuilder.metalId = id
+}
+export const setSize = (id) => {
+    database.orderBuilder.sizeId = id
+}
+export const setStyle = (id) => {
+    database.orderBuilder.styleId = id
 }
