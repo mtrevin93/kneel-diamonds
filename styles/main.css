@@ -32,6 +32,6 @@ ul {
     font-size: 1rem;
 }
 
-#cotainer {
-  display:flex
+.choices {
+  display: flex;
 }
