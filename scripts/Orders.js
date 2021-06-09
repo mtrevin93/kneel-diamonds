@@ -1,12 +1,9 @@
 import { getOrders, getStyles, getSizes, getMetals, getOrderBuilder } from "./database.js"
 
-const buildOrderListItem = (order) => {
-    return `<li>
-        Order #${order.id} cost ${costString}
-    </li>`
-}
-
 export const Orders = () => {
+
+    let html = "<ul>"
+    const htmlArray = []
     /*
         Can you explain why the state variable has to be inside
         the component function for Orders, but not the others?
@@ -16,24 +13,27 @@ const metals = getMetals()
 const styles = getStyles()
 const sizes = getSizes()
 
-const foundStylePrice = styles.find((style) => style.id === orders.styleId).price
-const foundMetalPrice = metals.find((metal) => metal.id === orders.metalId).price
-const foundSizePrice = sizes.find((size) => size.id === orders.sizeId).price
+for (const order of orders) {
+    const foundStylePrice = styles.find((style) => style.id === order.styleId).price
+    const foundMetalPrice = metals.find((metal) => metal.id === order.metalId).price
+    const foundSizePrice = sizes.find((size) => size.id === order.sizeId).price
 
-const totalCost = foundMetalPrice + foundStylePrice + foundSizePrice
-
-const costString = totalCost.toLocaleString("en-US", {
+    let totalCost = foundMetalPrice + foundStylePrice + foundSizePrice
+    let costString = totalCost.toLocaleString("en-US", {
     style: "currency",
-    currency: "USD"
-})
+    currency: "USD" })
 
-    let html = "<ul>"
 
-    const listItems = orders.map(buildOrderListItem)
+        html += `<li>
+        <name="order"/> Order #${order.id} cost ${costString}
+        </li>`
 
-    html += listItems.join("")
-    html += "</ul>"
 
-    return html
+
+
 }
-
+html += "</ul>"
+htmlArray.push(html)
+htmlArray.join("")
+return htmlArray
+}
