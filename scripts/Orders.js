@@ -28,9 +28,6 @@ for (const order of orders) {
         <name="order"/> Order #${order.id} cost ${costString}
         </li>`
 
-
-
-
 }
 html += "</ul>"
 htmlArray.push(html)

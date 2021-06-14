@@ -7,7 +7,6 @@ import { getMetals, getSizes, getStyles } from "./database.js"
 import { addCustomOrder } from "./database.js"
 import {getOrderBuilder} from "./database.js"
 
-const orderBuilder = getOrderBuilder()
 const styles = getStyles()
 const sizes = getSizes()
 const metals = getMetals()
@@ -16,9 +15,13 @@ document.addEventListener(
     "click",
     (event) => {
         if (event.target.id === "orderButton") {
-
+            const orderBuilder = getOrderBuilder()
             addCustomOrder()
+            document.getElementById(`metal`).checked = false
+            document.getElementById(`style`).checked = false
+            document.getElementById(`size`).checked = false
 
+            debugger
         }
     }
 )
